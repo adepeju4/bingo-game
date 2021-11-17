@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "nodemon server.js",
     "lint": "next lint",
-    "serve": "next start"
+    "serve": "next start",
+    "export": "next export"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
