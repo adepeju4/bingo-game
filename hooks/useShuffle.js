@@ -1,3 +1,5 @@
+
+
 function BoardControl(playerName, words) {
   this.name = playerName;
   this.type = "Board Control";

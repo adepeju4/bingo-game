@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/clipboard.module.css";
 import { useDispatch, useSelector } from "react-redux";
-function Clipboard({ playerName, gameId }) {
+function Clipboard({ playerName, data }) {
   const {
     addUser: { isAdded, error: addUserError, gameId: roomId },
   } = useSelector((state) => state);
@@ -16,13 +16,13 @@ function Clipboard({ playerName, gameId }) {
         <p>
           <strong>Hi {playerName}</strong>
         </p>
-        <p>copy game id to clipboard</p>
+        <p>copy default sentences to clipboard</p>
 
         <div>
-          <input type="text" className={styles.input} value={gameId} disabled/>
+          <input type="text" className={styles.input} value={data} disabled/>
           <button
             type="button"
-            onClick={() => navigator.clipboard.writeText(gameId)}
+            onClick={() => navigator.clipboard.writeText(data)}
             title="Copy to clipboard"
           >
             <svg
