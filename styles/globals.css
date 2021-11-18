@@ -32,7 +32,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
       -ms-overflow-style: none;
     scrollbar-width: none;
-    
+    overflow-y: hidden;
 }
 
 body::-webkit-scrollbar{
