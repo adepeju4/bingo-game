@@ -42,7 +42,7 @@
 
 
 .numInput, .textInput, .select, .gameIdInput{
-      transform: translateY(1000px);
+      transform: translateY(500px);
   animation: slideUp 0.8s ease-in-out forwards 0.8s;
 }
 
@@ -85,7 +85,7 @@
 .container p{
   line-height: 28px;
   font-size: 1.5rem;
-  transform: translateY(1000px);
+  transform: translateY(500px);
   animation: slideUp 0.8s ease-in-out forwards 0.8s;
 }
 
@@ -111,7 +111,7 @@
 
 .textInput{
     width: 30rem;
-    height: 7rem;
+    height: 10rem;
      outline: none;
      margin-left: .5rem;
      padding: .5rem;
@@ -209,7 +209,7 @@
 
 @keyframes slideUp {
   0% {
-    transform: translateY(1000px);
+    transform: translateY(500px);
   }
   100% {
     transform: translateY(0px);
