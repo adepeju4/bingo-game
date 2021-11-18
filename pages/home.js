@@ -93,8 +93,9 @@ function Home({ onSaveGameData }) {
         playerRole: "game master",
         roomId: `BG-${Date.now()}${(count += 1)}`,
       };
-      console.log(gameData)
+     
       window.localStorage.setItem("room", gameData.roomId);
+      window.localStorage.setItem("role", gameData.playerRole);
     } else {
       gameData = {
         player: playerName,
@@ -102,6 +103,7 @@ function Home({ onSaveGameData }) {
         playerRole: "member",
       };
       window.localStorage.setItem("room", gameData.gameId);
+          window.localStorage.setItem("role", gameData.playerRole);
     }
 
     onSaveGameData(gameData);

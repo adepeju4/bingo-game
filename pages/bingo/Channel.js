@@ -12,6 +12,7 @@ function Channel() {
 
   const router = useRouter();
 
+  const playerRole = window.localStorage.getItem("role");
   const { player, room: gameId } = router.query;
   const dispatch = useDispatch();
 
@@ -20,9 +21,9 @@ function Channel() {
     dispatch(getWords({ gameId: room }));
   }, []);
   const {
-    words: { isPending, error, words },
+    words: { isPending, error, words }
   } = useSelector((state) => state);
-
+  
   return (
     <div className={channel_container}>
       {error && <ErrorDisplay error={error} />}
@@ -32,7 +33,7 @@ function Channel() {
           <CustomizedSnackbars
             message={`Hi there ${player}, welcome to bingooo`}
           />
-          <Board playerName={player} words={words} />
+          <Board playerName={player} words={words} role={playerRole} />
         </>
       )}
     </div>

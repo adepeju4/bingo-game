@@ -24,11 +24,11 @@ import sty, {
   random_wrapper,
 } from "../styles/board.module.css";
 
-const Bingo = ({ playerName, words }) => {
+const Bingo = ({ playerName, words, role }) => {
   const [message, setmessage] = useState("");
   const [data, setdata] = useState([]);
   const [count, setCount] = useState(0);
-  const [controlInterval, setControlInterval] = useState(null)
+  const [controlInterval, setControlInterval] = useState(null);
   const [bingo, setBingo] = useState(false);
   const [style, setstyle] = useState({});
   const [modal, setModal] = useState(false);
@@ -43,7 +43,6 @@ const Bingo = ({ playerName, words }) => {
   } = useSelector((state) => state);
 
   const gameBoard = board;
-
 
   const [randomCall, setRandomCall] = useState(null);
 
@@ -69,7 +68,6 @@ const Bingo = ({ playerName, words }) => {
     return callAtRandom;
   };
 
-
   {
     bingo &&
       setTimeout(() => {
@@ -78,24 +76,22 @@ const Bingo = ({ playerName, words }) => {
   }
 
   const handleClick = (e) => {
+    console.log(role, 'hmmmmmm')
     const index = Number(e.target.value);
     if (data.includes(gameBoard[index])) {
       const result = matchCheck(parseInt(index), playerName);
-      
-        setstyle(
-          { ...style, [index]: { backgroundColor: "#fcb69f", color: "#ffecd2" }}
-          )
-        
-      
+
+      setstyle({
+        ...style,
+        [index]: { backgroundColor: "#fcb69f", color: "#ffecd2" },
+      });
+
       if (message !== result[0] && result[0] !== undefined) {
         setBingo(true);
         setmessage(result[0]);
       }
     }
   };
-  
-
-  
 
   const handleStart = (e) => {
     let interval;
@@ -110,19 +106,16 @@ const Bingo = ({ playerName, words }) => {
       }
     }, 4000);
     if (count === output.length) {
-      clearInterval(controlInterval)
+      clearInterval(controlInterval);
       setModal(true);
     }
     setControlInterval(interval);
   };
 
-
   const handleStop = (e) => {
-   clearInterval(controlInterval);
+    clearInterval(controlInterval);
   };
- 
-  
- 
+
   return (
     <>
       <div className={board_container}>
@@ -154,14 +147,18 @@ const Bingo = ({ playerName, words }) => {
           <div className={random}>
             <p className={[popover, arrow_left].join(" ")}>{randomCall}</p>
           </div>
-          <div className={random_buttons}>
-            <button className={start_random} onClick={handleStart}>
-              Start
-            </button>
-            <button className={stop_random} onClick={handleStop}>
-              Stop
-            </button>
-          </div>
+          {role === "game master" ? (
+            <div className={random_buttons}>
+              <button className={start_random} onClick={handleStart}>
+                Start
+              </button>
+              <button className={stop_random} onClick={handleStop}>
+                Stop
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       {bingo && <Balloons />}
