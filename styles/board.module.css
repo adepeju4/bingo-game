@@ -30,6 +30,7 @@
   cursor: pointer;
   position: relative;
   padding: 1.5rem 1rem;
+  font-weight: 400;
 }
 
 .box0,
@@ -184,7 +185,7 @@
 
 @media (max-width: 550px){
      .box{
-        font-size: .7rem;
+        font-size: .8rem;
     }
     .board_container{
       padding: 0;
@@ -194,10 +195,31 @@
 @media (max-width: 365px){
     .box{
         font-size: .5rem;
+        font-weight: 700;
     }
+    .grid{
+  grid-template-columns: repeat(5, 6rem);
+  }
 }
+
+@media (min-width: 1000px){
+  .grid{
+  grid-template-columns: repeat(5, 12rem);
+  }
+}
+@media (min-width: 551px){
+  .box{
+
+    font-size: 1rem;
+  }
+}
+
+
 @media (min-width: 831px){
   .board_container{
     flex: .6;
+  }
+  .box{
+    font-size: 1rem;
   }
 }

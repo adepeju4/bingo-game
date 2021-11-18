@@ -1,22 +1,15 @@
-import { useState } from "react";
+
 import styles from "../styles/clipboard.module.css";
-import { useDispatch, useSelector } from "react-redux";
-function Clipboard({ playerName, data }) {
-  const {
-    addUser: { isAdded, error: addUserError, gameId: roomId },
-  } = useSelector((state) => state);
 
+function Clipboard({ playerName, message, data }) {
  
-
-
-
   return (
     <div>
       <div className={styles.contact}>
         <p>
           <strong>Hi {playerName}</strong>
         </p>
-        <p>copy default sentences to clipboard</p>
+        <p>{message}</p>
 
         <div>
           <input type="text" className={styles.input} value={data} disabled/>

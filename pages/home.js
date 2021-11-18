@@ -150,7 +150,11 @@ function Home({ onSaveGameData }) {
     <>
       <div>
         <SnackbarError message={error} open={open} setOpen={setOpen} />
-        <Clipboard playerName='player' data={defaultWords}/>
+        <Clipboard
+          playerName="player"
+          message="copy default sentences to clipboard"
+          data={defaultWords}
+        />
         <div className={container}>
           <div className={container_content}>
             <div className={container_content_inner}>
@@ -207,12 +211,9 @@ function Home({ onSaveGameData }) {
                       type="text"
                       placeholder={`"sentence", "sentence"...`}
                       onChange={getWords}
-                     
                     />
                   </div>
-                  <p>
-                    Kindly input at least 30 sentences
-                  </p>
+                  <p>Kindly input at least 30 sentences</p>
                   <div className={btns}>
                     <button
                       id="create--game"

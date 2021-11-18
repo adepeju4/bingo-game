@@ -21,10 +21,11 @@ z-index: 1000;
 
 .input{
   margin-right: 1rem;
-  font-size: 1.2rem;
+  font-size: 1rem !important;
   background-color: transparent;
   border: none;
   outline: none;
+
 }
 
 .input::placeholder{
