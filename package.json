@@ -9,6 +9,7 @@
     "serve": "next start",
     "export": "next export"
   },
+  
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
