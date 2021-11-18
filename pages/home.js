@@ -203,7 +203,7 @@ function Home({ onSaveGameData }) {
                       className={textInput}
                       id="words"
                       type="text"
-                      placeholder="separate sentences with double quotes"
+                      placeholder={`"sentence", "sentence"...`}
                       onChange={getWords}
                      
                     />
