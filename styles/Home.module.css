@@ -31,7 +31,6 @@
 
 .container_img {
   width: 100%;
-  animation: slideIn 1.5s ease-in-out forwards;
 }
 
 .par {
@@ -41,10 +40,6 @@
 
 
 
-.numInput, .textInput, .select, .gameIdInput{
-      transform: translateY(500px);
-  animation: slideUp 0.8s ease-in-out forwards 0.8s;
-}
 
 .btns {
   height: 100%;
@@ -56,7 +51,7 @@
   align-items: center;
   justify-content: space-around;
   margin-top: 1rem;
-   animation: slideUp 0.8s ease-in-out forwards .2s;
+
 }
 
 .btns_more {
@@ -70,8 +65,8 @@
   position: relative;
   cursor: pointer;
   outline: none;
-  transform: translateY(50px);
- animation: slideUp 0.8s ease-in-out forwards .2s;
+ 
+
 }
 .or{
   color: var(--contrast-color);
@@ -85,16 +80,13 @@
 .container p{
   line-height: 28px;
   font-size: 1.5rem;
-  transform: translateY(500px);
-  animation: slideUp 0.8s ease-in-out forwards 0.8s;
 }
 
  .container h1 {
   font-size: 40px;
   color: var(--contrast-color);
   margin-bottom: 20px;
-  transform: translateY(100px);
-  animation: slideUp 0.8s ease forwards 0.5s;
+
 }
 .formInput {
   display: flex;
@@ -198,32 +190,6 @@
   color: #fff;
 }
 
-@keyframes slideIn {
-  0% {
-    transform: translateX(500px) scale(0.2);
-  }
-  100% {
-    transform: translateX(0px) scale(1);
-  }
-}
-
-@keyframes slideUp {
-  0% {
-    transform: translateY(500px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-@keyframes expand {
-  0% {
-    transform: translateX(1400px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
-}
 
 @media (max-width: 767.98px) {
   .container_content {
