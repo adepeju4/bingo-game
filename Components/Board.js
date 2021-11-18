@@ -20,7 +20,8 @@ import sty, {
   score_container,
   random_buttons,
   start_random,
-  stop_random
+  stop_random,
+  random_wrapper,
 } from "../styles/board.module.css";
 
 const Bingo = ({ playerName, words }) => {
@@ -146,25 +147,25 @@ const Bingo = ({ playerName, words }) => {
         </div>
       </div>
       <div className={random_container}>
-        <div className={score_container}>
-          <h3>
-            {message}
-          </h3>
-        </div>
-        <div className={random}>
-          <p className={[popover, arrow_left].join(" ")}>{randomCall}</p>
-        </div>
-        <div className={random_buttons}>
-          <button className={start_random} onClick={handleStart}>
-            Start
-          </button>
-          <button className={stop_random} onClick={handleStop}>
-            Stop
-          </button>
+        <div className={random_wrapper}>
+          <div className={score_container}>
+            <h3>{message}</h3>
+          </div>
+          <div className={random}>
+            <p className={[popover, arrow_left].join(" ")}>{randomCall}</p>
+          </div>
+          <div className={random_buttons}>
+            <button className={start_random} onClick={handleStart}>
+              Start
+            </button>
+            <button className={stop_random} onClick={handleStop}>
+              Stop
+            </button>
+          </div>
         </div>
       </div>
       {bingo && <Balloons />}
-      {modal && <GameModal message={message} open={modal} setOpen={setModal}/>}
+      {modal && <GameModal message={message} open={modal} setOpen={setModal} />}
     </>
   );
 };

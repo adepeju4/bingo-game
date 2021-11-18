@@ -1,7 +1,7 @@
 .random_container{
     display: flex;
     flex: .5;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     flex-direction: column;
 }
@@ -59,4 +59,10 @@
   margin-left: -9px; 
   border-top: 0;
   border-right: 0;
+}
+@media (min-width: 831px){
+  .random_container{
+    justify-content: center;
+    flex: .4;
+  }
 }
