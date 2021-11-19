@@ -8,9 +8,10 @@ const ioHandler = (req, res) => {
 
     io.on("connection", (socket) => {
       socket.broadcast.emit("a user connected");
-      socket.on("hello", (msg) => {
-        socket.emit("hello", "world!");
-      });
+      socket.broadcast.emit('this is a mssage')
+      // socket.on("hello", (msg) => {
+      //   socket.emit("hello", "world!");
+      // });
     });
 
     res.socket.server.io = io;
@@ -25,5 +26,6 @@ export const config = {
     bodyParser: false,
   },
 };
+
 
 export default ioHandler;

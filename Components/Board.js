@@ -3,6 +3,8 @@ import Balloons from "../Components/Balloons.js";
 import GameModal from "./Modal.js";
 import { createBoard } from "../redux/actions/playerboardActions";
 import { useDispatch, useSelector } from "react-redux";
+// import socket from "../utils/socket.js";
+import { io } from 'socket.io-client'
 import {
   random_container,
   random,
@@ -34,9 +36,52 @@ const Bingo = ({ playerName, words, role }) => {
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
 
+  // socket.connect();
+
+
+
   useEffect(() => {
     dispatch(createBoard(playerName, words));
+
+    // socket.emit('test', 'tessstinnnnggggggg')
+
+    // socket.on('test', (msg)=>console.log(msg, 'pls God'))
   }, []);
+
+const socket = io("/", {
+  autoConnect: true,
+  withCredentials: true,
+});
+  
+  socket.connect()
+  
+  console.log(socket, 'hmmmmmm')
+
+ useEffect(() => {
+   fetch("/api/socketserver").finally(() => {
+     const socket = io();
+
+     socket.on("connect", () => {
+       console.log("connected");
+       socket.emit("hello");
+       socket.on("message", ()=>console.log('message'))
+     });
+
+
+     socket.on("hello", (data) => {
+       console.log("hello", data);
+     });
+
+     socket.on("a user connected", () => {
+       console.log("a user connected");
+     });
+
+     socket.on("disconnect", () => {
+       console.log("disconnected");
+     });
+   });
+ }, []);
+
 
   const {
     board: { board },
@@ -76,7 +121,8 @@ const Bingo = ({ playerName, words, role }) => {
   }
 
   const handleClick = (e) => {
-    console.log(role, 'hmmmmmm')
+
+    console.log(role, 'the role')
     const index = Number(e.target.value);
     if (data.includes(gameBoard[index])) {
       const result = matchCheck(parseInt(index), playerName);
@@ -101,6 +147,7 @@ const Bingo = ({ playerName, words, role }) => {
       if (!data.includes(result)) {
         result = call();
         setCount((prev) => prev + 1);
+        socket.emit('sentence', 'result');
         setRandomCall(result);
         setdata((prev) => [...prev, result]);
       }
@@ -147,7 +194,7 @@ const Bingo = ({ playerName, words, role }) => {
           <div className={random}>
             <p className={[popover, arrow_left].join(" ")}>{randomCall}</p>
           </div>
-          {role === "game master" ? (
+          
             <div className={random_buttons}>
               <button className={start_random} onClick={handleStart}>
                 Start
@@ -156,9 +203,8 @@ const Bingo = ({ playerName, words, role }) => {
                 Stop
               </button>
             </div>
-          ) : (
-            <></>
-          )}
+      
+         
         </div>
       </div>
       {bingo && <Balloons />}
