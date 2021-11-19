@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import Balloons from "../Components/Balloons.js";
-import GameModal from "./Modal.js";
 import { createBoard } from "../redux/actions/playerboardActions";
 import { useDispatch, useSelector } from "react-redux";
-// import socket from "../utils/socket.js";
 import { io } from 'socket.io-client'
 import {
   random_container,
@@ -29,33 +27,21 @@ import sty, {
 const Bingo = ({ playerName, words, role }) => {
   const [message, setmessage] = useState("");
   const [data, setdata] = useState([]);
-  const [count, setCount] = useState(0);
   const [controlInterval, setControlInterval] = useState(null);
   const [bingo, setBingo] = useState(false);
   const [style, setstyle] = useState({});
-  const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
 
-  // socket.connect();
+
 
 
 
   useEffect(() => {
     dispatch(createBoard(playerName, words));
-
-    // socket.emit('test', 'tessstinnnnggggggg')
-
-    // socket.on('test', (msg)=>console.log(msg, 'pls God'))
   }, []);
 
-const socket = io("/", {
-  autoConnect: true,
-  withCredentials: true,
-});
   
-  socket.connect()
-  
-  console.log(socket, 'hmmmmmm')
+ 
 
  useEffect(() => {
    fetch("/api/socketserver").finally(() => {
@@ -147,15 +133,10 @@ const socket = io("/", {
       if (!data.includes(result)) {
         result = call();
         setCount((prev) => prev + 1);
-        socket.emit('sentence', 'result');
         setRandomCall(result);
         setdata((prev) => [...prev, result]);
       }
     }, 4000);
-    if (count === output.length) {
-      clearInterval(controlInterval);
-      setModal(true);
-    }
     setControlInterval(interval);
   };
 
@@ -208,7 +189,6 @@ const socket = io("/", {
         </div>
       </div>
       {bingo && <Balloons />}
-      {modal && <GameModal message={message} open={modal} setOpen={setModal} />}
     </>
   );
 };
