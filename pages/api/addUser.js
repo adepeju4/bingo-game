@@ -62,7 +62,7 @@ export default async function addUser(req, res) {
       },
     });
   } catch (error) {
-    console.log(error);
+ 
     return res.status(error.code).send({ status: "failed", message: error.message});
   }
 }

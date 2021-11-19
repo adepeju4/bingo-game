@@ -44,7 +44,7 @@ const Bingo = ({ playerName, words, role }) => {
  
 
  useEffect(() => {
-   fetch("/api/socketserver").finally(() => {
+   fetch("/").finally(() => {
      const socket = io();
 
      socket.on("connect", () => {
@@ -108,7 +108,6 @@ const Bingo = ({ playerName, words, role }) => {
 
   const handleClick = (e) => {
 
-    console.log(role, 'the role')
     const index = Number(e.target.value);
     if (data.includes(gameBoard[index])) {
       const result = matchCheck(parseInt(index), playerName);

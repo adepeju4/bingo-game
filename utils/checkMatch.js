@@ -51,7 +51,6 @@ const matchCheck = (num, playerName) => {
       }
     }
   }
-console.log(wordList, messages)
   return messages.reverse();
 };
 
