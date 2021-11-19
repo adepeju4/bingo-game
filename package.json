@@ -9,7 +9,6 @@
     "serve": "next start",
     "export": "next export"
   },
-  
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
@@ -29,7 +28,6 @@
     "react-router-dom": "^6.0.1",
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.0",
     "socket.io": "^4.3.1",
     "socket.io-client": "^4.3.2",
@@ -37,6 +35,7 @@
   },
   "devDependencies": {
     "eslint": "7",
-    "eslint-config-next": "12.0.2"
+    "eslint-config-next": "12.0.2",
+    "redux-logger": "^3.0.6"
   }
 }

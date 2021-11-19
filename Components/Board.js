@@ -41,32 +41,7 @@ const Bingo = ({ playerName, words, role }) => {
   }, []);
 
   
- 
 
- useEffect(() => {
-   fetch("/").finally(() => {
-     const socket = io();
-
-     socket.on("connect", () => {
-       console.log("connected");
-       socket.emit("hello");
-       socket.on("message", ()=>console.log('message'))
-     });
-
-
-     socket.on("hello", (data) => {
-       console.log("hello", data);
-     });
-
-     socket.on("a user connected", () => {
-       console.log("a user connected");
-     });
-
-     socket.on("disconnect", () => {
-       console.log("disconnected");
-     });
-   });
- }, []);
 
 
   const {
