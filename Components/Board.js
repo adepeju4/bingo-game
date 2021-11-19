@@ -132,7 +132,6 @@ const Bingo = ({ playerName, words, role }) => {
     interval = setInterval(() => {
       if (!data.includes(result)) {
         result = call();
-        setCount((prev) => prev + 1);
         setRandomCall(result);
         setdata((prev) => [...prev, result]);
       }
