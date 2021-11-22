@@ -17,9 +17,10 @@ export default async function getWords(req, res) {
       roomData = doc.data();
     });
 
-    const { words } = roomData;
+    const { gameTopic, words } = roomData;
+
   
-    return res.status(200).send({status: "success", message: 'Game words retrieved successfully', data: words });
+    return res.status(200).send({status: "success", message: 'Game words retrieved successfully', words, gameTopic });
   } catch (error) {
 throw new Error('Unable to retrieve game')
   }

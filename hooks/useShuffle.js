@@ -1,9 +1,10 @@
 
 
-function BoardControl(playerName, words) {
+function BoardControl(playerName, words, topic) {
   this.name = playerName;
   this.type = "Board Control";
   this.words = words;
+  this.topic = topic;
   this.size = null;
   this.properties = null;
   this.middleIndex = null;
@@ -63,8 +64,12 @@ BoardControl.prototype.findMiddle = function () {
      const slicedProp = this.properties.slice(0, 24);
      const theMiddle = Math.floor(slicedProp.length / 2);
      const value = theMiddle;
-     this.middleIndex = value;
-     this.properties = slicedProp.splice(value, 0, "BINGO");
+  this.middleIndex = value;
+  if (!this.topic) {
+    this.properties = slicedProp.splice(value, 0, "BINGO");
+    return slicedProp;
+  }
+    this.properties = slicedProp.splice(value, 0, this.topic);
      return slicedProp;
 
 };

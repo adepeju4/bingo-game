@@ -28,7 +28,7 @@ function Channel() {
     
   }, []);
   const {
-    words: { isPending, error, words }
+    words: { isPending, error, words, gameTopic }
   } = useSelector((state) => state);
   
   return (
@@ -41,7 +41,7 @@ function Channel() {
           <CustomizedSnackbars
             message={`Hi there ${player}, welcome to bingooo`}
           />
-          <Board playerName={player} words={words} role={playerRole} />
+          <Board playerName={player} words={words} role={playerRole} topic={gameTopic} />
         <Clipboard playerName={player} message='Copy game id to clipboard' data={gameId}/>
         </>
       )}

@@ -12,8 +12,9 @@ export const getWords = (data) => async (dispatch) => {
     const {gameId} = data
     try {
         const response = await axios.get(`/api/getWords?gameId=${gameId}`);
+        const {words, gameTopic} = response.data
        
-        dispatch({ type: GET_WORDS, payload: response.data.data });
+        dispatch({ type: GET_WORDS, payload: {words, gameTopic } });
     } catch (error) {
       
         dispatch({type: GET_WORDS_ERROR, payload: error.message})

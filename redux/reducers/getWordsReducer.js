@@ -8,6 +8,7 @@ const initState = {
   isPending: false,
   error: null,
   words: null,
+  gameTopic: null
 };
 
 const getWordsReducer = (state = initState, action) => {
@@ -19,7 +20,8 @@ const getWordsReducer = (state = initState, action) => {
         ...state,
         error: null,
         isPending: false,
-        words: action.payload,
+        words: action.payload.words,
+        gameTopic: action.payload.gameTopic
       };
     case GET_WORDS_ERROR:
       return { ...state, isPending: false, error: action.payload };

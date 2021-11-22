@@ -119,10 +119,20 @@
   margin-top: -2px;
   margin-bottom: 2px;
 }
+.random_container{
+      width: 100%;
+   
+}
 
 .random_wrapper{
   margin-bottom: 2rem;
+  width: 100%;
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .random_buttons button{
     flex: 1 1 auto;
@@ -137,6 +147,11 @@
   padding: 1rem 2rem;
   border: none;
   cursor: pointer;
+  font-size: 1rem;
+}
+
+.random_buttons button:not(:first-child){
+  margin-left: .6rem;
 }
 
 .random_buttons button:hover{
@@ -144,7 +159,7 @@
 }
 
 .start_random{
-    margin-right: 2rem;
+    
     background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
 }
 

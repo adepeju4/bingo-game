@@ -26,7 +26,7 @@ function Home({ onSaveGameData }) {
   let count = 0;
 
   const [users, setUsers] = useState("");
-  const [cards, setCards] = useState("");
+  const [topic, setTopic] = useState("");
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
   const [words, setWords] = useState("");
@@ -55,16 +55,13 @@ function Home({ onSaveGameData }) {
     setUsers(e.target.value);
   };
 
-  const getCards = (e) => {
-    setCards(e.target.value);
+  const getgameTopic = (e) => {
+    setTopic(e.target.value);
   };
 
   const getWords = (e) => {
   
       setWords(e.target.value);
-  
-    
-
     const wordArr = words.split(/[\n'',]+/);
 
     for (const [i, word] of wordArr.entries()) {
@@ -88,6 +85,7 @@ function Home({ onSaveGameData }) {
       gameData = {
         totalPlayers: users,
         gameMaster: playerName,
+        gameTopic: topic,
         otherPlayers: users - 1,
         words,
         playerRole: "game master",
@@ -184,6 +182,19 @@ function Home({ onSaveGameData }) {
                     />
                   </div>
                   <div className={formInput}>
+                    <label htmlFor="topic">
+                      <p>Topic: </p>
+                    </label>
+                    <input
+                      className={gameIdInput}
+                      id="topic"
+                      type="text"
+                      value={topic}
+                      onChange={getgameTopic}
+                      required
+                    />
+                  </div>
+                  <div className={formInput}>
                     <label htmlFor="Users">
                       <p>Players:</p>
                     </label>
@@ -202,7 +213,6 @@ function Home({ onSaveGameData }) {
                     <label htmlFor="words">
                       <p>Words:</p>
                     </label>
-
                     <textarea
                       spellCheck="true"
                       value={words}
@@ -211,6 +221,7 @@ function Home({ onSaveGameData }) {
                       type="text"
                       placeholder={`"sentence", "sentence"...`}
                       onChange={getWords}
+                      required
                     />
                   </div>
                   <p>Kindly input at least 30 sentences</p>

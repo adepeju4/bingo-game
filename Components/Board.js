@@ -24,25 +24,21 @@ import sty, {
   random_wrapper,
 } from "../styles/board.module.css";
 
-const Bingo = ({ playerName, words, role }) => {
+const Bingo = ({ playerName, words, role, topic }) => {
   const [message, setmessage] = useState("");
   const [data, setdata] = useState([]);
-  const [controlInterval, setControlInterval] = useState(null);
+  const [newBoard, setNewBoard] = useState(false)
   const [bingo, setBingo] = useState(false);
   const [style, setstyle] = useState({});
+    const [controlInterval, setControlInterval] = useState(null);
   const dispatch = useDispatch();
-
-
+  
 
 
 
   useEffect(() => {
-    dispatch(createBoard(playerName, words));
+    dispatch(createBoard(playerName, words, topic));
   }, []);
-
-  
-
-
 
   const {
     board: { board },
@@ -74,46 +70,79 @@ const Bingo = ({ playerName, words, role }) => {
     return callAtRandom;
   };
 
-  {
-    bingo &&
-      setTimeout(() => {
-        setBingo(false);
-      }, 5000);
+  if (bingo) {
+    setTimeout(() => {
+      setBingo(false);
+    }, 6000);
+    clearInterval(controlInterval);
   }
+
+
 
   const handleClick = (e) => {
 
     const index = Number(e.target.value);
     if (data.includes(gameBoard[index])) {
-      const result = matchCheck(parseInt(index), playerName);
-
+    let check;
+    if (newBoard === true) {
+      check = matchCheck('new')
+    } else {
+      check = matchCheck('old')
+    }
+      const result = check(parseInt(index), playerName);
+      setNewBoard(false)
       setstyle({
         ...style,
         [index]: { backgroundColor: "#fcb69f", color: "#ffecd2" },
       });
-
-      if (message !== result[0] && result[0] !== undefined) {
-        setBingo(true);
+      'WHAT IS HAPPENING'
+    if (message !== result[0] && result[0] !== undefined) {
+      setBingo(true);
         setmessage(result[0]);
       }
     }
   };
 
-  const handleStart = (e) => {
-    let interval;
-    const call = randomize();
-    let result = "";
-    interval = setInterval(() => {
-      if (!data.includes(result)) {
-        result = call();
-        setRandomCall(result);
-        setdata((prev) => [...prev, result]);
-      }
-    }, 4000);
-    setControlInterval(interval);
+  const handleDraw = (e) => {
+    if (!bingo) {
+     const call = randomize();
+      let result = "";
+     if (!data.includes(result) && !bingo) {
+       result = call();
+       setRandomCall(result);
+        clearInterval(controlInterval);
+       setdata((prev) => [...prev, result]);
+     }
+  }
+   
   };
 
-  const handleStop = (e) => {
+    const handleStart = (e) => {
+      let interval;
+      const call = randomize();
+      let result = "";
+      interval = setInterval(() => {
+        
+          result = call();
+          setRandomCall(result);
+          setdata((prev) => [...prev, result]);
+        
+      }, 4000);
+      setControlInterval(interval);
+    };
+
+    const handleStop = (e) => {
+      clearInterval(controlInterval);
+    };
+
+  const handleNew = (e) => {
+    setNewBoard(true)
+    dispatch(createBoard(playerName, words, topic));
+    setstyle({})
+    setdata([]);
+    setRandomCall(null);
+    setBingo(false);
+    setmessage("")
     clearInterval(controlInterval);
   };
 
@@ -148,17 +177,22 @@ const Bingo = ({ playerName, words, role }) => {
           <div className={random}>
             <p className={[popover, arrow_left].join(" ")}>{randomCall}</p>
           </div>
-          
-            <div className={random_buttons}>
-              <button className={start_random} onClick={handleStart}>
-                Start
-              </button>
-              <button className={stop_random} onClick={handleStop}>
-                Stop
-              </button>
-            </div>
-      
-         
+
+          <div className={random_buttons}>
+            <button className={start_random} onClick={handleStart}>
+              Call
+            </button>
+            <button className={start_random} onClick={handleDraw}>
+              Draw
+            </button>
+            <button className={stop_random} onClick={handleNew}>
+              New Card
+            </button>
+
+            <button className={stop_random} onClick={handleStop}>
+              Stop
+            </button>
+          </div>
         </div>
       </div>
       {bingo && <Balloons />}
